@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sisinfo OPPD</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <h1>Hello HTML</h1>
+  <script type="module">
+    console.log('Starting import...');
+    import('/src/main.tsx')
+      .then(() => console.log('Import success'))
+      .catch(e => {
+        console.error('Import failed:', e);
+        document.body.innerHTML += '<p style="color:red">Error: ' + e.message + '</p>';
+      });
+  </script>
+</body>
+
+</html>
