@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from 'react';
 import { useParams } from 'react-router-dom';
-import { Search, Loader2, Database, Download, FileSpreadsheet, Box, Layers, Truck, Wrench, AlertTriangle, XOctagon, X, Save, Trash2, Send, Edit, FileText, UserCheck, Calendar } from 'lucide-react';
+import { Search, Loader2, Database, Download, Box, Layers, Truck, Wrench, AlertTriangle, XOctagon, X, Save, Trash2, Send, Edit, FileText, UserCheck, Calendar } from 'lucide-react';
 import * as XLSX from 'xlsx';
 import clsx from 'clsx';
 import sql from '../lib/db';

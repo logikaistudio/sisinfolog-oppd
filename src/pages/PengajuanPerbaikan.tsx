@@ -1,17 +1,15 @@
 import { useState, useMemo } from 'react';
 import {
     ClipboardList,
-    Loader2,
     CheckCircle2,
-    Clock,
     Settings,
-    MoreVertical,
     Calendar,
     User,
     MapPin,
     AlertCircle,
     ArrowRightCircle,
-    ArrowLeftCircle
+    ArrowLeftCircle,
+    Wrench
 } from 'lucide-react';
 import clsx from 'clsx';
 
@@ -95,7 +93,7 @@ const INITIAL_TICKETS: Ticket[] = [
 
 const PengajuanPerbaikan = () => {
     const [tickets, setTickets] = useState<Ticket[]>(INITIAL_TICKETS);
-    const [isLoading, setIsLoading] = useState(false);
+
 
     // Calculate Summary Stats
     const stats = useMemo(() => {

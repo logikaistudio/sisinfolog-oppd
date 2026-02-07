@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { Plus, Search, MapPin, Edit2, Trash2, Filter } from 'lucide-react';
+import { Plus, Search, Edit2, Trash2 } from 'lucide-react';
 import { SATGAS_DATA } from '../data/mockData';
 import type { Satgas } from '../types';
 
 const MasterSatgas = () => {
     const [searchTerm, setSearchTerm] = useState('');
-    const [satgasList, setSatgasList] = useState<Satgas[]>(SATGAS_DATA);
+    const [satgasList] = useState<Satgas[]>(SATGAS_DATA);
 
     const filteredSatgas = satgasList.filter(satgas =>
         satgas.name.toLowerCase().includes(searchTerm.toLowerCase()) ||

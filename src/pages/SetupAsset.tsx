@@ -4,7 +4,7 @@ import type { AssetCategory } from '../types';
 import { Plus, Edit, Trash2, Search } from 'lucide-react';
 
 const SetupAsset = () => {
-    const [categories, setCategories] = useState<AssetCategory[]>(ASSET_CATEGORIES);
+    const [categories] = useState<AssetCategory[]>(ASSET_CATEGORIES);
 
     return (
         <div className="space-y-6">

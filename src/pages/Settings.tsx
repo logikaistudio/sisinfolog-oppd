@@ -42,7 +42,7 @@ const ROLES_DEFAULT = ['Admin', 'Pimpinan', 'Satgas', 'User'];
 
 const SettingsPage = () => {
     const [activeTab, setActiveTab] = useState<'users' | 'roles'>('users');
-    const [isLoading, setIsLoading] = useState(false);
+
 
     // User State
     const [users, setUsers] = useState<UserData[]>([]);
@@ -58,20 +58,20 @@ const SettingsPage = () => {
 
     // Fetch Users
     const fetchUsers = async () => {
-        setIsLoading(true);
+
         try {
             const result = await sql`SELECT id, name, email, role, created_at FROM users ORDER BY id DESC`;
             setUsers(result as unknown as UserData[]);
         } catch (error) {
             console.error("Failed to fetch users:", error);
         } finally {
-            setIsLoading(false);
+
         }
     };
 
     // Fetch Permissions for Role
     const fetchPermissions = async (role: string) => {
-        setIsLoading(true);
+
         try {
             const result = await sql`SELECT * FROM role_permissions WHERE role_name = ${role}`;
             const existingPerms = result as unknown as RolePermission[];
@@ -94,7 +94,7 @@ const SettingsPage = () => {
         } catch (error) {
             console.error("Failed to fetch permissions:", error);
         } finally {
-            setIsLoading(false);
+
         }
     };
 
@@ -322,8 +322,8 @@ const SettingsPage = () => {
                                                     <button
                                                         onClick={() => handlePermissionChange(idx, action as keyof RolePermission)}
                                                         className={`p-1 rounded transition-colors ${(perm as any)[action]
-                                                                ? 'text-green-600 hover:bg-green-50'
-                                                                : 'text-gray-300 hover:text-gray-400'
+                                                            ? 'text-green-600 hover:bg-green-50'
+                                                            : 'text-gray-300 hover:text-gray-400'
                                                             }`}
                                                     >
                                                         {(perm as any)[action]

@@ -91,7 +91,7 @@ const DataAset = () => {
                 const ws = wb.Sheets[wsname];
                 const jsonData = XLSX.utils.sheet_to_json(ws) as any[];
 
-                const formattedData = jsonData.map((item, index) => {
+                const formattedData = jsonData.map((item) => {
                     const getVal = (keys: string[]) => {
                         for (let k of keys) {
                             if (item[k] !== undefined) return String(item[k]);
