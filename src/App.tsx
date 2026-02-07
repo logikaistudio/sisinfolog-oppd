@@ -8,6 +8,8 @@ import DataAset from './pages/DataAset';
 import SatgasDetail from './pages/SatgasDetail';
 import PengajuanPerbaikan from './pages/PengajuanPerbaikan';
 import SettingsPage from './pages/Settings';
+import Login from './pages/Login';
+import ProtectedRoute from './components/ProtectedRoute';
 
 // Placeholders for other pages
 const Placeholder = ({ title }: { title: string }) => (
@@ -22,8 +24,15 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path="/login" element={<Login />} />
         <Route path="/" element={<Navigate to="/dashboard" replace />} />
-        <Route element={<Layout />}>
+
+        {/* Protected Routes */}
+        <Route element={
+          <ProtectedRoute>
+            <Layout />
+          </ProtectedRoute>
+        }>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/master-user" element={<MasterUser />} />
           <Route path="/master-satgas" element={<MasterSatgas />} />
