@@ -7,6 +7,7 @@ import SetupAsset from './pages/SetupAsset';
 import DataAset from './pages/DataAset';
 import SatgasDetail from './pages/SatgasDetail';
 import PengajuanPerbaikan from './pages/PengajuanPerbaikan';
+import SettingsPage from './pages/Settings';
 
 // Placeholders for other pages
 const Placeholder = ({ title }: { title: string }) => (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/setup-asset" element={<SetupAsset />} />
           <Route path="/satgas/type/:type" element={<SatgasDetail />} />
           <Route path="/pengajuan" element={<PengajuanPerbaikan />} />
+          <Route path="/settings" element={<SettingsPage />} />
           <Route path="*" element={<Placeholder title="404 Not Found" />} />
         </Route>
       </Routes>
