@@ -1,5 +1,4 @@
 {
-    "statical": true,
     "rewrites": [
         {
             "source": "/(.*)",
