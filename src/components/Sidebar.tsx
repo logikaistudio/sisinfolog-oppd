@@ -1,6 +1,20 @@
 import { useState } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Users, Users2, Database, Settings, FolderClosed, ChevronDown, ChevronRight, Folder, Box, MapPin, Library, Wrench } from 'lucide-react';
+import {
+    LayoutDashboard,
+    Users,
+    Users2,
+    Database,
+    Settings,
+    FolderClosed,
+    ChevronDown,
+    ChevronRight,
+    Folder,
+    Box,
+    MapPin,
+    Library,
+    Wrench
+} from 'lucide-react';
 import clsx from 'clsx';
 import { SATGAS_DATA } from '../data/mockData';
 
@@ -15,6 +29,11 @@ const Sidebar = () => {
     const location = useLocation();
     const [expandedMenus, setExpandedMenus] = useState<string[]>(['Satgas', 'Master Data']);
 
+    // Get User Role
+    const userString = localStorage.getItem('user');
+    const user = userString ? JSON.parse(userString) : null;
+    const isSuperAdmin = user && (user.role === 'Superadmin' || user.role === 'Admin');
+
     // Extract unique Satgas types
     const uniqueSatgasTypes = Array.from(new Set(SATGAS_DATA.map(s => s.type)));
 
@@ -24,7 +43,7 @@ const Sidebar = () => {
         icon: MapPin
     }));
 
-    const navItems: NavItem[] = [
+    const baseNavItems: NavItem[] = [
         { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
         {
             name: 'Satgas',
@@ -44,6 +63,15 @@ const Sidebar = () => {
         },
         { name: 'Setting', path: '/settings', icon: Settings },
     ];
+
+    // Filter Navigation Items
+    const navItems = baseNavItems.filter(item => {
+        // Only show Setting for Admin/Superadmin
+        if (item.name === 'Setting') {
+            return isSuperAdmin;
+        }
+        return true;
+    });
 
     const toggleMenu = (menuName: string) => {
         setExpandedMenus(prev =>
@@ -72,7 +100,7 @@ const Sidebar = () => {
                             'w-full flex items-center justify-between px-4 py-2.5 text-sm font-medium rounded-lg transition-colors mx-3 my-1',
                             childActive
                                 ? 'bg-primary/10 text-primary'
-                                : 'text-text hover:bg-light hover:text-primary'
+                                : 'text-gray-600 hover:bg-gray-50 hover:text-primary'
                         )}
                         style={{ width: 'calc(100% - 1.5rem)' }}
                     >
@@ -110,7 +138,7 @@ const Sidebar = () => {
                         isChild ? 'px-3 py-2 mr-2 ml-0' : 'px-4 py-2.5 mx-3',
                         isActive
                             ? 'bg-primary text-white shadow-md'
-                            : 'text-text hover:bg-light hover:text-primary'
+                            : 'text-gray-600 hover:bg-gray-50 hover:text-primary'
                     )
                 }
             >
@@ -121,11 +149,11 @@ const Sidebar = () => {
     };
 
     return (
-        <div className="w-64 bg-white text-text flex flex-col h-screen fixed left-0 top-0 overflow-y-auto border-r border-gray-100 font-sans shadow-sm z-20">
+        <div className="w-64 bg-white text-gray-800 flex flex-col h-screen fixed left-0 top-0 overflow-y-auto border-r border-gray-100 font-sans shadow-sm z-20">
             <div className="h-16 flex items-center px-6 border-b border-gray-100">
                 <div className="flex items-center space-x-3">
                     <img src="/logo-pmpp.png" alt="Logo" className="w-10 h-10 object-contain" />
-                    <span className="font-bold text-xl text-dark">Sisinfo OPPD</span>
+                    <span className="font-bold text-xl text-primary">Sisinfo OPPD</span>
                 </div>
             </div>
 
@@ -138,7 +166,7 @@ const Sidebar = () => {
             </nav>
 
             <div className="p-4 border-t border-gray-100">
-                <div className="text-xs text-muted text-center">
+                <div className="text-xs text-gray-400 text-center">
                     &copy; 2024 OPPD. All rights reserved.
                 </div>
             </div>
