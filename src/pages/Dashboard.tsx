@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { SATGAS_DATA } from '../data/mockData';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, RadialBarChart, RadialBar, PolarAngleAxis, Legend, LabelList } from 'recharts';
 import { ArrowUpRight, ArrowDownRight, Activity, Zap, PenTool, Layout, Box, Edit3, Save, Loader2 } from 'lucide-react';
@@ -7,6 +8,7 @@ import type { LocationData } from '../types';
 import sql from '../lib/db';
 
 const Dashboard = () => {
+    const navigate = useNavigate();
     const [isEditMode, setIsEditMode] = useState(false);
     const [selectedRegion, setSelectedRegion] = useState('All Regions');
     const [isLoading, setIsLoading] = useState(true);
@@ -354,9 +356,10 @@ const Dashboard = () => {
                                     dataKey="value"
                                     cornerRadius={6}
                                     stroke="none"
+                                    onClick={(data) => navigate(`/data-aset?condition=${encodeURIComponent(data.name)}`)}
                                 >
                                     {conditionData.map((entry, index) => (
-                                        <Cell key={`cell-${index}`} fill={entry.color} />
+                                        <Cell key={`cell-${index}`} fill={entry.color} cursor="pointer" />
                                     ))}
                                 </Pie>
                                 <Tooltip content={<CustomTooltip />} />
@@ -417,7 +420,12 @@ const Dashboard = () => {
                             <p className="col-span-full text-center text-sm text-gray-500">No data available for current Satgas</p>
                         ) : (
                             satgasStats.map((item, index) => (
-                                <div key={index} className="flex flex-col items-center">
+                                <div
+                                    key={index}
+                                    className="flex flex-col items-center cursor-pointer hover:bg-gray-50/80 p-3 rounded-xl transition-all duration-200 transform hover:scale-105"
+                                    onClick={() => navigate(`/satgas/type/${encodeURIComponent(item.name)}`)}
+                                    title={`Lihat detail ${item.name}`}
+                                >
                                     <div className="h-40 w-full relative">
                                         <ResponsiveContainer width="100%" height="100%">
                                             <RadialBarChart
